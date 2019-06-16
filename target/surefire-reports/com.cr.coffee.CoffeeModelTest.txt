@@ -1,0 +1,11 @@
+-------------------------------------------------------------------------------
+Test set: com.cr.coffee.CoffeeModelTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 13.725 s <<< FAILURE! - in com.cr.coffee.CoffeeModelTest
+givenCityReturnsListOfRestaurants(com.cr.coffee.CoffeeModelTest)  Time elapsed: 0.775 s  <<< FAILURE!
+java.lang.AssertionError: 
+
+Expected: one of {<com.cr.coffee.models.RestaurantModel@69dc7b24>, <com.cr.coffee.models.RestaurantModel@50628080>, <com.cr.coffee.models.RestaurantModel@155318b5>, <com.cr.coffee.models.RestaurantModel@1add90e0>, <com.cr.coffee.models.RestaurantModel@7bf94e91>, <com.cr.coffee.models.RestaurantModel@3fdbb7ee>, <com.cr.coffee.models.RestaurantModel@32c08610>, <com.cr.coffee.models.RestaurantModel@44ec4a38>, <com.cr.coffee.models.RestaurantModel@755009f2>, <com.cr.coffee.models.RestaurantModel@1756a471>, <com.cr.coffee.models.RestaurantModel@2190508d>, <com.cr.coffee.models.RestaurantModel@70b630d>, <com.cr.coffee.models.RestaurantModel@72e1e587>, <com.cr.coffee.models.RestaurantModel@5036a286>, <com.cr.coffee.models.RestaurantModel@73818435>, <com.cr.coffee.models.RestaurantModel@37393dab>, <com.cr.coffee.models.RestaurantModel@4866a755>}
+     but: was <com.cr.coffee.models.RestaurantModel@4c0bfe9e>
+	at com.cr.coffee.CoffeeModelTest.givenCityReturnsListOfRestaurants(CoffeeModelTest.java:67)
+
