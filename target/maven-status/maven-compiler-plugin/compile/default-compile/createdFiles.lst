@@ -3,10 +3,15 @@ com/cr/coffee/controllers/RestaurantController.class
 com/cr/coffee/models/RestaurantSpecification.class
 com/cr/coffee/models/CoffeeModel.class
 com/cr/coffee/repositories/RestCoffeeRepository.class
+com/cr/coffee/models/RestaurantRatingModel.class
+com/cr/coffee/repositories/UserRepository.class
 com/cr/coffee/controllers/CoffeeController.class
+com/cr/coffee/controllers/UserController.class
+com/cr/coffee/models/UserModel.class
 com/cr/coffee/repositories/RestaurantRepository.class
-com/cr/coffee/models/SearchCriteria.class
+com/cr/coffee/controllers/RestaurantRatingController.class
 com/cr/coffee/models/RestaurantModel.class
 com/cr/coffee/models/RestCoffeeModel.class
 com/cr/coffee/repositories/CoffeeRepository.class
 com/cr/coffee/controllers/RestCoffeeController.class
+com/cr/coffee/repositories/RestaurantRatingRepository.class

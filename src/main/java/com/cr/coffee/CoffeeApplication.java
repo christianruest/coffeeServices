@@ -6,6 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 
+/**
+ * mvn spring-boot:run
+ */
 @SpringBootApplication(scanBasePackages = {"com.cr.coffee"})
 @EnableJpaRepositories(basePackages = {"com.cr.coffee.repositories"})
 public class CoffeeApplication {

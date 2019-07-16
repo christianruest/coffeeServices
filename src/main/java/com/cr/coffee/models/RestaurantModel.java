@@ -23,6 +23,10 @@ public class RestaurantModel {
     private int zipCode;
     @Column(name="search_text")
     private String searchText;
+    @Column(name="number_of_ratings")
+    private Integer numberOfRatings;
+    @Column(name="average_rating")
+    private Double averageRating;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "restaurant_id", referencedColumnName = "restaurant_id")
@@ -93,5 +97,21 @@ public class RestaurantModel {
 
     public void setSearchText(String searchText) {
         this.searchText = searchText;
+    }
+
+    public Integer getNumberOfRatings() {
+        return numberOfRatings;
+    }
+
+    public void setNumberOfRatings(Integer numberOfRatings) {
+        this.numberOfRatings = numberOfRatings;
+    }
+
+    public Double getAverageRating() {
+        return averageRating;
+    }
+
+    public void setAverageRating(Double averageRating) {
+        this.averageRating = averageRating;
     }
 }
