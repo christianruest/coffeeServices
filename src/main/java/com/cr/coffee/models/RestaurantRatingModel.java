@@ -1,5 +1,6 @@
 package com.cr.coffee.models;
 
+import com.cr.coffee.controllers.exceptions.NoDataFoundException;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.Column;
@@ -8,10 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.logging.Logger;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Valid
 @Table(name="restaurant_rating")
 public class RestaurantRatingModel {
 
@@ -19,14 +20,15 @@ public class RestaurantRatingModel {
     @Column(name="rest_rating_id")
     private long id;
 
-    @NotNull(message = "restaurantId may not be null")
+    @NotNull(message = "restaurantId must not be null")
     @Column(name="restaurant_id")
     private Long restaurantId;
 
     @Column(name="user_id")
     private String userId;
 
-    private int rating;
+    @NotNull(message = "rating must not be null")
+    private Integer rating;
 
     private String comment;
 
@@ -54,11 +56,11 @@ public class RestaurantRatingModel {
         this.userId = userId;
     }
 
-    public int getRating() {
+    public Integer getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(Integer rating) {
         this.rating = rating;
     }
 
@@ -69,4 +71,5 @@ public class RestaurantRatingModel {
     public void setComment(String comment) {
         this.comment = comment;
     }
+
 }
