@@ -29,16 +29,8 @@ public class RestaurantRatingController {
     RestaurantRatingRepository restaurantRatingRepository;
 
     @GetMapping("/{id}")
-    public RestaurantRatingModel get(@PathVariable("id") @Min(1) Long id) {
-        RestaurantRatingModel restRating = restaurantRatingRepository.getOne(id);
-
-        //throw error when no object with id exists
-        if(!(restRating.getClass().equals(RestaurantRatingModel.class))) {
-            throw new NoDataFoundException(id);
-        }
-
-        return restRating;
-
+    public RestaurantRatingModel get(@PathVariable("id") long id) {
+        return restaurantRatingRepository.findById(id).orElseThrow(() -> new NoDataFoundException(id));
     }
 
     @PostMapping
