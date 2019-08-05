@@ -5,11 +5,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.util.logging.Logger;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -18,6 +18,7 @@ public class RestaurantRatingModel {
 
     @Id
     @Column(name="rest_rating_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @NotNull(message = "restaurantId must not be null")
@@ -27,10 +28,11 @@ public class RestaurantRatingModel {
     @Column(name="user_id")
     private String userId;
 
+    @Column(name="device_id")
+    private String deviceId;
+
     @NotNull(message = "rating must not be null")
     private Integer rating;
-
-    private String comment;
 
     public long getId() {
         return id;
@@ -64,12 +66,11 @@ public class RestaurantRatingModel {
         this.rating = rating;
     }
 
-    public String getComment() {
-        return comment;
+    public String getDeviceId() {
+        return deviceId;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
     }
-
 }

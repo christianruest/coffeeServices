@@ -1,5 +1,7 @@
 package com.cr.coffee.controllers;
 
+import com.cr.coffee.controllers.exceptions.InvalidIdException;
+import com.cr.coffee.controllers.exceptions.NoDataFoundException;
 import com.cr.coffee.models.RestaurantModel;
 import com.cr.coffee.models.RestaurantSpecificationBuilder;
 import com.cr.coffee.repositories.RestaurantRepository;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.prefs.NodeChangeEvent;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -33,7 +36,7 @@ public class RestaurantController {
 
     @GetMapping("/{id}")
     public RestaurantModel get(@PathVariable("id") long id) {
-        return restaurantRepository.getOne(id);
+        return restaurantRepository.findById(id).orElseThrow(() -> new NoDataFoundException(id));
     }
 
     /*
@@ -55,6 +58,8 @@ public class RestaurantController {
     public void update(@RequestBody RestaurantModel restaurantModel) {
         if(get(restaurantModel.getId()) != null) {
             restaurantRepository.save(restaurantModel);
+        } else {
+            throw new InvalidIdException(restaurantModel.getId());
         }
     }
 

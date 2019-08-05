@@ -1,6 +1,8 @@
 package com.cr.coffee.controllers;
 
 
+import com.cr.coffee.controllers.exceptions.InvalidIdException;
+import com.cr.coffee.controllers.exceptions.NoDataFoundException;
 import com.cr.coffee.models.UserModel;
 import com.cr.coffee.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,20 +30,23 @@ public class UserController {
 
     @GetMapping("/{id}")
     public UserModel get(@PathVariable("id") String id) {
-        return userRepository.getOne(id);
+        return userRepository.findById(id).orElseThrow(() -> new NoDataFoundException(id));
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@RequestBody UserModel userModel) {
-        userRepository.save(userModel);
+    public UserModel create(@RequestBody UserModel userModel) {
+        return userRepository.save(userModel);
     }
 
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
-    public void update(@RequestBody UserModel userModel) {
-        if(get(userModel.getId()) != null)
-            userRepository.save(userModel);
+    public UserModel update(@RequestBody UserModel userModel) {
+        if(get(userModel.getId()) != null) {
+            return userRepository.save(userModel);
+        } else {
+            throw new InvalidIdException(userModel.getId());
+        }
     }
 
     @DeleteMapping("/{id}")

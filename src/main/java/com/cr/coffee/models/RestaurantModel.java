@@ -1,6 +1,7 @@
 package com.cr.coffee.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ public class RestaurantModel {
 
     @Id
     @Column(name="restaurant_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String address;
     private String city;

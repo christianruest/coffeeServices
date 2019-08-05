@@ -25,6 +25,10 @@ import javax.validation.constraints.Min;
 @RequestMapping("/api/restaurant/rating")
 public class RestaurantRatingController {
 
+    public RestaurantRatingController(RestaurantRatingRepository restaurantRatingRepository) {
+        this.restaurantRatingRepository = restaurantRatingRepository;
+    }
+
     @Autowired
     RestaurantRatingRepository restaurantRatingRepository;
 
@@ -35,8 +39,8 @@ public class RestaurantRatingController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void createRestaurantRating(@Valid @RequestBody RestaurantRatingModel restaurantRatingModel) {
-        restaurantRatingRepository.save(restaurantRatingModel);
+    public RestaurantRatingModel createRestaurantRating(@Valid @RequestBody RestaurantRatingModel restaurantRatingModel) {
+        return restaurantRatingRepository.save(restaurantRatingModel);
     }
 
 }

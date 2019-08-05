@@ -2,10 +2,9 @@ package com.cr.coffee.controllers;
 
 import com.cr.coffee.controllers.exceptions.InvalidIdException;
 import com.cr.coffee.controllers.exceptions.NoDataFoundException;
-import com.cr.coffee.models.RestCoffeeModel;
-import com.cr.coffee.models.RestaurantModel;
-import com.cr.coffee.repositories.RestCoffeeRepository;
-import com.cr.coffee.repositories.RestaurantRepository;
+import com.cr.coffee.models.CommentModel;
+import com.cr.coffee.repositories.CommentRepository;
+import com.cr.coffee.repositories.RestaurantRatingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,49 +18,42 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/api/restCoffee")
-public class RestCoffeeController {
+@RequestMapping("/api/comment")
+public class CommentController {
 
     @Autowired
-    private RestCoffeeRepository restCoffeeRepository;
+    CommentRepository commentRepository;
 
     @GetMapping("/{id}")
-    public RestCoffeeModel get(@PathVariable("id") long id) {
-        return restCoffeeRepository.findById(id).orElseThrow(() -> new NoDataFoundException(id));
+    public CommentModel get(@PathVariable("id") long id) {
+        return commentRepository.findById(id).orElseThrow(() -> new NoDataFoundException(id));
     }
-
-    /*
-    * get all coffee
-    */
-    @GetMapping("/all")
-    public List<RestCoffeeModel> getAll() {
-        return restCoffeeRepository.findAll();
-    }
-
 
     @PostMapping
-    @ResponseStatus(HttpStatus.OK)
-    public RestCoffeeModel create(@RequestBody RestCoffeeModel restCoffeeModel) {
-        return restCoffeeRepository.save(restCoffeeModel);
+    @ResponseStatus(HttpStatus.CREATED)
+    public CommentModel create(@RequestBody CommentModel commentModel) {
+        commentModel.setRatingUserId(commentModel.getUserId());
+        return commentRepository.save(commentModel);
     }
 
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
-    public RestCoffeeModel update(@RequestBody RestCoffeeModel restCoffeeModel) {
-        if(get(restCoffeeModel.getId()) != null) {
-            return restCoffeeRepository.save(restCoffeeModel);
+    public CommentModel update(@RequestBody CommentModel commentModel) {
+        if(get(commentModel.getId()) != null) {
+            commentModel.setRatingUserId(commentModel.getUserId());
+            return commentRepository.save(commentModel);
         } else {
-            throw new InvalidIdException(restCoffeeModel.getId());
+            throw new InvalidIdException(commentModel.getId());
         }
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable("id") long id) {
-        restCoffeeRepository.deleteById(id);
+        commentRepository.deleteById(id);
     }
 }

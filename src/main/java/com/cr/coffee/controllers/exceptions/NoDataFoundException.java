@@ -10,4 +10,7 @@ public class NoDataFoundException extends RuntimeException {
         super("No data found with id: " + id.toString());
     }
 
+    public NoDataFoundException(String id) {
+        super("No data found with id: " + id);
+    }
 }

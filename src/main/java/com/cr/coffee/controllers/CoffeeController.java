@@ -1,5 +1,7 @@
 package com.cr.coffee.controllers;
 
+import com.cr.coffee.controllers.exceptions.InvalidIdException;
+import com.cr.coffee.controllers.exceptions.NoDataFoundException;
 import com.cr.coffee.models.CoffeeModel;
 import com.cr.coffee.repositories.CoffeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +32,7 @@ public class CoffeeController {
     */
     @GetMapping("/{id}")
     public CoffeeModel get(@PathVariable("id") long id) {
-        return coffeeRepository.getOne(id);
+        return coffeeRepository.findById(id).orElseThrow(() -> new NoDataFoundException(id));
     }
 
     /*
@@ -46,8 +48,8 @@ public class CoffeeController {
     */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@RequestBody CoffeeModel coffeeModel) {
-        coffeeRepository.save(coffeeModel);
+    public CoffeeModel create(@RequestBody CoffeeModel coffeeModel) {
+        return coffeeRepository.save(coffeeModel);
     }
 
     /*
@@ -55,12 +57,12 @@ public class CoffeeController {
     */
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
-    public void update(@RequestBody CoffeeModel coffeeModel) {
+    public CoffeeModel update(@RequestBody CoffeeModel coffeeModel) {
         if(get(coffeeModel.getId()) != null){
-            coffeeRepository.save(coffeeModel);
-        } /*else {
-            throw new Exception('Missing Data Exception'); //TODO: create custom error message
-        }*/
+            return coffeeRepository.save(coffeeModel);
+        } else {
+            throw new InvalidIdException(coffeeModel.getId());
+        }
     }
 
     /*
