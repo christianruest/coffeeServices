@@ -1,6 +1,6 @@
 package com.cr.coffee.repositories;
 
-import com.cr.coffee.models.RestaurantModel;
+import com.cr.coffee.models.restaurant.RestaurantModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;

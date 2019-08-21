@@ -1,11 +1,9 @@
 package com.cr.coffee.controllers;
 
-import com.cr.coffee.controllers.exceptions.InvalidIdException;
-import com.cr.coffee.controllers.exceptions.NoDataFoundException;
-import com.cr.coffee.models.CoffeeModel;
+import com.cr.coffee.models.coffee.CoffeeModel;
 import com.cr.coffee.repositories.CoffeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,56 +20,63 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/coffee")
-public class CoffeeController {
+public class CoffeeController extends EntityController {
 
     @Autowired
     private CoffeeRepository coffeeRepository;
 
-    /*
-    * get coffee by Id
-    */
+    /**
+     * get coffee by id
+     *
+     * @param id of coffee as Long
+     * @return HttpEntity of CoffeeModel
+     */
     @GetMapping("/{id}")
-    public CoffeeModel get(@PathVariable("id") long id) {
-        return coffeeRepository.findById(id).orElseThrow(() -> new NoDataFoundException(id));
+    public HttpEntity<CoffeeModel> get(@PathVariable("id") long id) {
+        return getEntity(coffeeRepository, id);
     }
 
-    /*
-    * get all coffee
-    */
+    /**
+     * get all coffees
+     *
+     * @return List of all coffees in the system
+     */
     @GetMapping("/all")
-    public List<CoffeeModel> getAll() {
-        return coffeeRepository.findAll();
+    public List<HttpEntity> getAll() {
+        return getAllEntities(coffeeRepository);
     }
 
-    /*
-    * create coffee
-    */
+    /**
+     * creates a coffee
+     *
+     * @param coffeeModel
+     * @return HttpEntity of CoffeeModel
+     * @throws Exception
+     */
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public CoffeeModel create(@RequestBody CoffeeModel coffeeModel) {
-        return coffeeRepository.save(coffeeModel);
+    public HttpEntity<CoffeeModel> create(@RequestBody CoffeeModel coffeeModel) throws Exception {
+        return createEntity(coffeeRepository, coffeeModel);
     }
 
-    /*
-    * update coffee
-    */
+    /**
+     * updates a coffee in the system
+     *
+     * @param coffeeModel
+     * @return coffeeModel after update
+     */
     @PutMapping
-    @ResponseStatus(HttpStatus.OK)
-    public CoffeeModel update(@RequestBody CoffeeModel coffeeModel) {
-        if(get(coffeeModel.getId()) != null){
-            return coffeeRepository.save(coffeeModel);
-        } else {
-            throw new InvalidIdException(coffeeModel.getId());
-        }
+    public HttpEntity<CoffeeModel> update(@RequestBody CoffeeModel coffeeModel) {
+        return updateEntity(coffeeRepository, coffeeModel);
     }
 
-    /*
-    * delete coffee
-    */
+    /**
+     * delete coffee
+     *
+     * @param id
+     */
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable("id") long id) {
-        coffeeRepository.deleteById(id);
+        deleteEntity(coffeeRepository, id);
     }
 
 }

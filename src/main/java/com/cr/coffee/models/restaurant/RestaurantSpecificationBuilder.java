@@ -1,7 +1,6 @@
-package com.cr.coffee.models;
+package com.cr.coffee.models.restaurant;
 
 import com.cr.coffee.utils.SearchCriteria;
-import com.cr.coffee.utils.SearchCriteriaContainer;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.util.ArrayList;

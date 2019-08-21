@@ -1,5 +1,6 @@
-package com.cr.coffee.models;
+package com.cr.coffee.models.restaurant;
 
+import com.cr.coffee.models.restaurant.RestaurantModel;
 import com.cr.coffee.utils.SearchCriteria;
 import org.springframework.data.jpa.domain.Specification;
 

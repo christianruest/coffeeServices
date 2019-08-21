@@ -2,8 +2,8 @@ package com.cr.coffee;
 
 //import static org.assertj.core.api.Assertions.assertThat;
 
-import com.cr.coffee.models.RestaurantModel;
-import com.cr.coffee.models.RestaurantSpecification;
+import com.cr.coffee.models.restaurant.RestaurantModel;
+import com.cr.coffee.models.restaurant.RestaurantSpecification;
 import com.cr.coffee.utils.SearchCriteria;
 import com.cr.coffee.repositories.RestaurantRepository;
 import org.junit.Before;
@@ -38,19 +38,19 @@ public class RestaurantSpecificationTest {
     @Before
     public void init() {
         restaurantHinicht = new RestaurantModel();
-        restaurantHinicht.setAddress("Dornacherstrasse 12");
-        restaurantHinicht.setCity("Grindelwald");
+//        restaurantHinicht.setAddress("Dornacherstrasse 12");
+//        restaurantHinicht.setCity("Grindelwald");
         restaurantHinicht.setName("Hinicht");
         restaurantHinicht.setPhoneNumber("0411234567");
-        restaurantHinicht.setZipCode(6003);
+//        restaurantHinicht.setZipCode(6003);
         repository.save(restaurantHinicht);
 
         restaurantNachbar = new RestaurantModel();
-        restaurantNachbar.setAddress("Obergrundstrasse 29");
-        restaurantNachbar.setCity("Luzern");
+//        restaurantNachbar.setAddress("Obergrundstrasse 29");
+//        restaurantNachbar.setCity("Luzern");
         restaurantNachbar.setName("Nachbar");
         restaurantNachbar.setPhoneNumber("0411239876");
-        restaurantNachbar.setZipCode(6003);
+//        restaurantNachbar.setZipCode(6003);
         repository.save(restaurantNachbar);
     }
 

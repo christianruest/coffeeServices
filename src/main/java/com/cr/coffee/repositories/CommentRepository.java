@@ -1,6 +1,6 @@
 package com.cr.coffee.repositories;
 
-import com.cr.coffee.models.CommentModel;
+import com.cr.coffee.models.restaurant.CommentModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

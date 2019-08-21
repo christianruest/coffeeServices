@@ -1,4 +1,4 @@
-package com.cr.coffee.models;
+package com.cr.coffee.models.restaurant;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

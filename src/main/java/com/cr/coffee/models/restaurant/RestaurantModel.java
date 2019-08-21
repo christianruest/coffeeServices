@@ -1,28 +1,32 @@
-package com.cr.coffee.models;
+package com.cr.coffee.models.restaurant;
 
 
+import com.cr.coffee.models.AddressModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name="restaurant")
-public class RestaurantModel {
+public class RestaurantModel implements Serializable {
 
     @Id
     @Column(name="restaurant_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String address;
-    private String city;
     private String name;
     @Column(name="phone")
     private String phoneNumber;
-    @Column(name="zip_code")
-    private int zipCode;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id")
+    private AddressModel address;
+
     @Column(name="search_text")
     private String searchText;
     @Column(name="number_of_ratings")
@@ -31,7 +35,7 @@ public class RestaurantModel {
     private Double averageRating;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "restaurant_id", referencedColumnName = "restaurant_id")
+    @JoinColumn(name = "restaurant_id")
     private List<RestCoffeeModel> restCoffeeModels;
 
     public RestaurantModel() {
@@ -43,22 +47,6 @@ public class RestaurantModel {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
     }
 
     public String getName() {
@@ -75,14 +63,6 @@ public class RestaurantModel {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public int getZipCode() {
-        return zipCode;
-    }
-
-    public void setZipCode(int zipCode) {
-        this.zipCode = zipCode;
     }
 
     public List<RestCoffeeModel> getRestCoffeeModels() {
@@ -116,4 +96,14 @@ public class RestaurantModel {
     public void setAverageRating(Double averageRating) {
         this.averageRating = averageRating;
     }
+
+    public AddressModel getAddress() {
+        return address;
+    }
+
+    public void setAddress(AddressModel address) {
+        this.address = address;
+    }
+
+
 }

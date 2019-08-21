@@ -6,6 +6,7 @@ import com.cr.coffee.controllers.exceptions.NoDataFoundException;
 import com.cr.coffee.models.UserModel;
 import com.cr.coffee.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,36 +24,32 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/user")
-public class UserController {
+public class UserController extends EntityController {
 
     @Autowired
     private UserRepository userRepository;
 
     @GetMapping("/{id}")
-    public UserModel get(@PathVariable("id") String id) {
-        return userRepository.findById(id).orElseThrow(() -> new NoDataFoundException(id));
+    public HttpEntity<UserModel> get(@PathVariable("id") String id) {
+        return getEntity(userRepository, id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public UserModel create(@RequestBody UserModel userModel) {
-        return userRepository.save(userModel);
+    public HttpEntity<UserModel> create(@RequestBody UserModel userModel) {
+        return createEntity(userRepository, userModel);
     }
 
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
-    public UserModel update(@RequestBody UserModel userModel) {
-        if(get(userModel.getId()) != null) {
-            return userRepository.save(userModel);
-        } else {
-            throw new InvalidIdException(userModel.getId());
-        }
+    public HttpEntity<UserModel> update(@RequestBody UserModel userModel) {
+        return updateEntity(userRepository, userModel);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable("id") String id) {
-        userRepository.deleteById(id);
+        deleteEntity(userRepository, id);
     }
 
     @GetMapping("/username/{userName}")

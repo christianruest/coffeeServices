@@ -1,7 +1,7 @@
 package com.cr.coffee.utils;
 
 
-import com.cr.coffee.models.RestaurantRatingModel;
+import com.cr.coffee.models.restaurant.RestaurantRatingModel;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 

@@ -1,0 +1,10 @@
+-------------------------------------------------------------------------------
+Test set: com.cr.coffee.RestaurantSpecificationTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 13.721 s <<< FAILURE! - in com.cr.coffee.RestaurantSpecificationTest
+givenCityReturnsListOfRestaurants(com.cr.coffee.RestaurantSpecificationTest)  Time elapsed: 0.444 s  <<< ERROR!
+org.springframework.dao.InvalidDataAccessApiUsageException: Unable to locate Attribute  with the the given name [zipCode] on this ManagedType [com.cr.coffee.models.restaurant.RestaurantModel]; nested exception is java.lang.IllegalArgumentException: Unable to locate Attribute  with the the given name [zipCode] on this ManagedType [com.cr.coffee.models.restaurant.RestaurantModel]
+	at com.cr.coffee.RestaurantSpecificationTest.givenCityReturnsListOfRestaurants(RestaurantSpecificationTest.java:69)
+Caused by: java.lang.IllegalArgumentException: Unable to locate Attribute  with the the given name [zipCode] on this ManagedType [com.cr.coffee.models.restaurant.RestaurantModel]
+	at com.cr.coffee.RestaurantSpecificationTest.givenCityReturnsListOfRestaurants(RestaurantSpecificationTest.java:69)
+

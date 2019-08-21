@@ -3,11 +3,12 @@ package com.cr.coffee.controllers.exceptions;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import javax.validation.constraints.NotNull;
 
-@ResponseStatus(HttpStatus.NOT_FOUND)
+@ResponseStatus(HttpStatus.BAD_REQUEST)
 public class InvalidIdException extends RuntimeException {
 
-    public InvalidIdException(Long id){
+    public InvalidIdException(@NotNull Long id){
         super("Invalid ID: " + id.toString());
     }
 
