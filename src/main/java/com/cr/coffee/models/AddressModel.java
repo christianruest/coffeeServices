@@ -24,7 +24,6 @@ public class AddressModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="address_id")
-    @JsonIgnore
     private long id;
 
     @JsonIgnore
